@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>The Human System RPG — Patch 19 Visual Identity</title>
+  <style>
+    /* ============================================================
+       TACTILE HANDHELD CONSOLE STYLING & CORE UTILITIES
+       ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0d1117;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      touch-action: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Color Palettes */
+    :root {
+      --scr-light:  #e7f0c4;
+      --scr-mid:    #a5b96b;
+      --scr-dark:   #586b3a;
+      --scr-ink:    #202713;
+      --scr-glow:   rgba(155, 188, 15, 0.15);
+
+      /* Device Body - Default: Atomic Purple */
+      --case-base:  rgba(103, 58, 183, 0.85);
+      --case-grad:  linear-gradient(135deg, rgba(142, 68, 173, 0.9) 0%, rgba(74, 35, 90, 0.95) 100%);
+      --case-border:#3b1d54;
+      --btn-a-color: #b81d43;
+      --btn-b-color: #7d1c34;
+      --btn-x-color: #4b4fa8;
+      --btn-y-color: #2d8f83;
+      --dpad-color:  #292929;
+    }
+
+    /* Screen Skins */
+    body.skin-dmg {
+      --scr-light:  #e7f0c4;
+      --scr-mid:    #a5b96b;
+      --scr-dark:   #586b3a;
+      --scr-ink:    #202713;
+      --scr-glow:   rgba(155, 188, 15, 0.15);
+    }
+    body.skin-pocket {
+      --scr-light:  #c2caba;
+      --scr-mid:    #a2aa9a;
+      --scr-dark:   #626a5a;
+      --scr-ink:    #121a0a;
+      --scr-glow:   rgba(194, 202, 186, 0.1);
+    }
+    body.skin-cyber {
+      --scr-light:  #fcd116;
+      --scr-mid:    #c99a00;
+      --scr-dark:   #734d00;
+      --scr-ink:    #211200;
+      --scr-glow:   rgba(252, 209, 22, 0.15);
+    }
+
+    /* Shell skins */
+    body.shell-atomic {
+      --case-base:  rgba(126, 85, 196, 0.78);
+      --case-grad:  linear-gradient(135deg, rgba(137, 94, 214, 0.8) 0%, rgba(68, 30, 115, 0.9) 100%);
+      --case-border:#3b146b;
+      --pcb-visibility: block;
+    }
+    body.shell-dmg {
+      --case-base:  #c2c4b6;
+      --case-grad:  linear-gradient(180deg, #dbddd0 0%, #b8bab0 100%);
+      --case-border:#7d7f75;
+      --btn-a-color: #7d1f88;
+      --btn-b-color: #4c55a8;
+      --btn-x-color: #4f8fce;
+      --btn-y-color: #d9a13a;
+      --dpad-color:  #3b3c36;
+      --pcb-visibility: none;
+    }
+    body.shell-yellow {
+      --case-base:  #f1c40f;
+      --case-grad:  linear-gradient(180deg, #f39c12 0%, #d35400 100%);
+      --case-border:#962d00;
+      --btn-a-color: #6d2c91;
+      --btn-b-color: #2c3e50;
+      --btn-x-color: #1f6f8b;
+      --btn-y-color: #1f8b5f;
+      --dpad-color:  #34495e;
+      --pcb-visibility: none;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Console Wrapper */
+    .console-wrapper {
+      position: relative;
+      width: min(97vw, 700px);
+      height: min(96vh, 920px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      perspective: 1000px;
+    }
+
+    /* Chassis Body */
+    .console-body {
+      width: 100%;
+      height: 100%;
+      background: var(--case-grad);
+      border: 6px solid var(--case-border);
+      border-radius: 42px 42px 92px 92px;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.8),
+        inset 0 4px 6px rgba(255, 255, 255, 0.3),
+        inset 0 -12px 20px rgba(0, 0, 0, 0.5);
+      padding: 16px 22px 26px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+
+    /* Simulated PCB traces */
+    .pcb-circuit {
+      display: var(--pcb-visibility, block);
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 30% 70%, rgba(0, 255, 0, 0.05) 0%, transparent 40%),
+        linear-gradient(rgba(0, 255, 128, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 128, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 20px 20px, 20px 20px;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .pcb-battery {
+      display: var(--pcb-visibility, block);
+      position: absolute;
+      top: 20%;
+      left: 8%;
+      width: 40px;
+      height: 70px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Screen Bezel */
+    .screen-bezel {
+      width: min(100%, 420px);
+      margin: 0 auto;
+      background: #232529;
+      border-radius: 16px 16px 28px 28px;
+      border: 4px solid #141619;
+      padding: 16px 20px;
+      box-shadow: 
+        inset 0 4px 12px rgba(0,0,0,0.9),
+        0 2px 4px rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Bezel Header */
+    .bezel-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      border-bottom: 2px solid #5b2c34;
+      padding-bottom: 4px;
+    }
+    .bezel-line-left { flex: 1; height: 2px; background: #2f3542; margin-right: 8px; }
+    .bezel-title {
+      font-size: 11px;
+      font-weight: 900;
+      color: #95a5a6;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+    .bezel-line-right { flex: 1; height: 2px; background: #2f3542; margin-left: 8px; }
+
+    /* Screen Glass Housing */
+    .screen-port {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 160 / 144;
+      background: #000;
+      border: 4px solid #0f0f11;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: inset 0 0 20px rgba(0,0,0,1);
+    }
+
+    /* Interactive Game Canvas */
+    #gameCanvas {
+      width: 100%;
+      height: 100%;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+      background: var(--scr-light);
+      display: block;
+    }
+
+    /* Overlay visual filters */
+    .screen-scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 1px,
+        rgba(0, 0, 0, 0.12) 1px,
+        rgba(0, 0, 0, 0.12) 2px
+      );
+      pointer-events: none;
+      z-index: 5;
+    }
+    .screen-reflection {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.03) 25%,
+        transparent 45%
+      );
+      pointer-events: none;
+      z-index: 6;
+    }
+    .screen-glow-effect {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, var(--scr-glow) 0%, transparent 80%);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Power Indicator LED */
+    .power-led-group {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .power-led {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #e74c3c;
+      box-shadow: 0 0 8px #e74c3c;
+      transition: background 0.3s;
+    }
+    .power-led.on {
+      background: #2ecc71;
+      box-shadow: 0 0 8px #2ecc71;
+    }
+    .power-label {
+      font-size: 6px;
+      color: #95a5a6;
+      text-transform: uppercase;
+    }
+
+    /* Console Plate Label */
+    .brand-plate {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #7f8c8d;
+      letter-spacing: 3px;
+      font-weight: 700;
+      text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Handheld Control Panel */
+    .controls-panel {
+      flex: 1;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 14px;
+      padding-top: 24px;
+      min-height: 230px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Button placement layout */
+    .main-controls {
+      display: grid;
+      grid-template-columns: 126px minmax(150px, 1fr) 156px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 18px;
+    }
+
+    /* D-pad Cross Frame */
+    .dpad-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    .dpad-bar {
+      position: absolute;
+      background: var(--dpad-color);
+      box-shadow: 
+        0 4px 8px rgba(0,0,0,0.4),
+        inset 0 1px 1px rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+    .dpad-bar.vert {
+      left: 40px;
+      top: 0;
+      width: 40px;
+      height: 120px;
+    }
+    .dpad-bar.horiz {
+      left: 0;
+      top: 40px;
+      width: 120px;
+      height: 40px;
+    }
+    .dpad-center {
+      position: absolute;
+      left: 44px;
+      top: 44px;
+      width: 32px;
+      height: 32px;
+      background: radial-gradient(circle, #1a1a1a 0%, var(--dpad-color) 70%);
+      border-radius: 50%;
+      z-index: 10;
+    }
+    /* Touch target buttons for D-pad */
+    .dpad-btn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      outline: none;
+      z-index: 12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.15);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .dpad-btn:active, .dpad-btn.pressed {
+      background: rgba(0, 0, 0, 0.25);
+    }
+    .dpad-up    { top: 0; left: 40px; width: 40px; height: 40px; border-radius: 4px 4px 0 0; }
+    .dpad-down  { bottom: 0; left: 40px; width: 40px; height: 40px; border-radius: 0 0 4px 4px; }
+    .dpad-left  { left: 0; top: 40px; width: 40px; height: 40px; border-radius: 4px 0 0 4px; }
+    .dpad-right { right: 0; top: 40px; width: 40px; height: 40px; border-radius: 0 4px 4px 0; }
+
+    /* SNES-inspired X/Y/A/B diamond */
+    .ab-buttons-wrapper {
+      position: relative;
+      width: 152px;
+      height: 152px;
+      flex: 0 0 152px;
+      transform: none;
+      background: rgba(0, 0, 0, 0.16);
+      border-radius: 50%;
+      box-shadow: 
+        inset 0 2px 5px rgba(0,0,0,0.45),
+        0 2px 2px rgba(255,255,255,0.08);
+    }
+    .ab-buttons-wrapper::before,
+    .ab-buttons-wrapper::after {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.08);
+      pointer-events: none;
+    }
+    .ab-buttons-wrapper::before {
+      left: 72px; top: 18px; width: 8px; height: 116px;
+      border-radius: 8px;
+    }
+    .ab-buttons-wrapper::after {
+      left: 18px; top: 72px; width: 116px; height: 8px;
+      border-radius: 8px;
+    }
+    .action-group {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      width: 50px;
+      z-index: 2;
+    }
+    .group-x { left: 51px; top: 2px; }
+    .group-y { left: 4px; top: 51px; }
+    .group-a { right: 4px; top: 51px; }
+    .group-b { left: 51px; bottom: 2px; }
+    .action-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 900;
+      font-size: 16px;
+      box-shadow: 
+        0 6px 0 rgba(0,0,0,0.5),
+        0 8px 15px rgba(0,0,0,0.4);
+      transform: translateY(0);
+      transition: all 0.05s ease;
+    }
+    .action-btn:active, .action-btn.pressed {
+      transform: translateY(4px);
+      box-shadow: 
+        0 2px 0 rgba(0,0,0,0.5),
+        0 4px 6px rgba(0,0,0,0.4);
+    }
+    .btn-a {
+      background: radial-gradient(circle at 35% 35%, #f0625d 0%, var(--btn-a-color) 70%);
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .btn-b {
+      background: radial-gradient(circle at 35% 35%, #5c63d3 0%, var(--btn-b-color) 70%);
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .btn-x {
+      background: radial-gradient(circle at 35% 35%, #6f74df 0%, var(--btn-x-color) 70%);
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .btn-y {
+      background: radial-gradient(circle at 35% 35%, #37b99e 0%, var(--btn-y-color) 70%);
+      border: 1px solid rgba(0,0,0,0.2);
+    }
+    .action-label {
+      font-size: 10px;
+      font-weight: bold;
+      color: #18202a;
+      text-transform: uppercase;
+      transform: none;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.12);
+    }
+
+    /* Option & System row */
+    .system-row {
+      display: flex;
+      justify-content: center;
+      gap: 34px;
+      margin-top: 0;
+      padding-top: 2px;
+    }
+    .sys-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .sys-btn {
+      width: 50px;
+      height: 12px;
+      background: #535c68;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      transform: rotate(-25deg);
+      cursor: pointer;
+      box-shadow: 
+        0 3px 0 rgba(0,0,0,0.5),
+        0 4px 6px rgba(0,0,0,0.3);
+      transition: all 0.05s ease;
+    }
+    .sys-btn:active, .sys-btn.pressed {
+      transform: rotate(-25deg) translateY(2px);
+      box-shadow: 
+        0 1px 0 rgba(0,0,0,0.5),
+        0 2px 3px rgba(0,0,0,0.3);
+    }
+    .sys-label {
+      font-size: 9px;
+      font-weight: 900;
+      color: #2c3e50;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Console speaker slot styling */
+    .speaker-grille {
+      display: flex;
+      gap: 8px;
+      transform: rotate(-28deg);
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+      pointer-events: none;
+    }
+    .grille-bar {
+      width: 6px;
+      height: 55px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 3px;
+      box-shadow: inset 1px 1px 1px rgba(255,255,255,0.06);
+    }
+
+    /* In-deck control guide: positioned between D-pad and face buttons */
+    .keyboard-card {
+      width: 100%;
+      align-self: center;
+      background: rgba(20, 24, 30, 0.88);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      padding: 10px 11px;
+      margin: 0;
+      font-size: 9px;
+      color: #94a3b8;
+      line-height: 1.35;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08),
+        0 6px 16px rgba(0,0,0,0.18);
+    }
+    .keyboard-card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #f1c40f;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .kbd-line {
+      display: block;
+      margin-top: 2px;
+    }
+    .kbd-btn {
+      display: inline-block;
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 3px;
+      padding: 0 4px;
+      color: #cbd5e1;
+      font-size: 8px;
+      line-height: 1.25;
+    }
+
+    /* Boot Splash Overlay */
+    .canvas-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--scr-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 12px;
+      text-align: center;
+      font-family: inherit;
+    }
+    .overlay-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--scr-ink);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .overlay-text {
+      font-size: 8px;
+      color: var(--scr-ink);
+      margin-bottom: 12px;
+    }
+    .start-tap-msg {
+      font-size: 10px;
+      font-weight: bold;
+      color: var(--scr-ink);
+      animation: blink 1.2s infinite step-end;
+      border: 1px solid var(--scr-ink);
+      padding: 4px 8px;
+      background: var(--scr-mid);
+      cursor: pointer;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Theme Skin Customizer */
+    .customizer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      padding: 6px 12px;
+      border-radius: 10px;
+      margin-top: 8px;
+      gap: 12px;
+    }
+    .skin-opt {
+      font-size: 9px;
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+    .skin-opt:hover, .skin-opt.active {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 520px) {
+      .console-wrapper {
+        width: min(97vw, 430px);
+        height: 96vh;
+      }
+      .console-body {
+        border-radius: 28px 28px 78px 78px;
+        padding: 12px 12px 18px;
+      }
+      .screen-bezel {
+        padding: 12px 14px;
+      }
+      .controls-panel {
+        padding-top: 14px;
+        gap: 10px;
+        min-height: 218px;
+      }
+      .main-controls {
+        grid-template-columns: 112px minmax(92px, 1fr) 136px;
+        gap: 8px;
+      }
+      .dpad-wrapper {
+        width: 112px;
+        height: 112px;
+      }
+      .dpad-bar.vert { left: 37px; width: 38px; height: 112px; }
+      .dpad-bar.horiz { top: 37px; width: 112px; height: 38px; }
+      .dpad-center { left: 41px; top: 41px; width: 30px; height: 30px; }
+      .dpad-up, .dpad-down { left: 37px; width: 38px; height: 38px; }
+      .dpad-left, .dpad-right { top: 37px; width: 38px; height: 38px; }
+      .ab-buttons-wrapper {
+        width: 136px;
+        height: 136px;
+        flex-basis: 136px;
+      }
+      .ab-buttons-wrapper::before { left: 64px; top: 17px; height: 102px; }
+      .ab-buttons-wrapper::after { left: 17px; top: 64px; width: 102px; }
+      .action-btn { width: 44px; height: 44px; }
+      .action-group { width: 46px; }
+      .group-x { left: 45px; top: 2px; }
+      .group-y { left: 3px; top: 45px; }
+      .group-a { right: 3px; top: 45px; }
+      .group-b { left: 45px; bottom: 2px; }
+      .keyboard-card {
+        font-size: 8px;
+        padding: 7px 6px;
+        border-radius: 10px;
+        line-height: 1.25;
+      }
+      .keyboard-card strong { font-size: 8px; margin-bottom: 3px; }
+      .kbd-btn { font-size: 7px; padding: 0 2px; }
+      .system-row { gap: 30px; }
+    }
+
+
+
+    /* Second screen / diagnostic readout panel */
+    .scanner-panel {
+      width: 100%;
+      min-height: 78px;
+      margin-top: 10px;
+      background: linear-gradient(180deg, rgba(6, 12, 12, 0.98) 0%, rgba(16, 28, 25, 0.98) 100%);
+      border: 3px solid #141619;
+      border-radius: 10px;
+      padding: 7px 9px;
+      box-shadow:
+        inset 0 0 14px rgba(0,0,0,0.9),
+        0 2px 4px rgba(255,255,255,0.06);
+      color: var(--scr-light);
+      text-shadow: 0 0 4px var(--scr-glow);
+      font-family: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .scanner-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.03) 2px,
+        rgba(255,255,255,0.03) 3px
+      );
+      pointer-events: none;
+    }
+    .scanner-header {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(231, 240, 196, 0.25);
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--scr-mid);
+      text-transform: uppercase;
+    }
+    .scanner-speaker {
+      position: relative;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--scr-mid);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .scanner-body {
+      position: relative;
+      min-height: 28px;
+      font-size: 11px;
+      line-height: 1.28;
+      color: var(--scr-light);
+      white-space: pre-line;
+    }
+    .scanner-hint {
+      position: relative;
+      margin-top: 4px;
+      font-size: 8px;
+      line-height: 1.2;
+      color: var(--scr-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+  </style>
+</head>
+<body class="shell-atomic skin-dmg">
+
+  <main class="console-wrapper">
+    <div class="console-body">
+      <!-- Hardware layers -->
+      <div class="pcb-circuit"></div>
+      <div class="pcb-battery"></div>
+
+      <!-- Bezel Screen Area -->
+      <div class="screen-bezel">
+        <div class="bezel-header">
+          <div class="bezel-line-left"></div>
+          <div class="bezel-title">16-BIT CONTROL DECK</div>
+          <div class="bezel-line-right"></div>
+        </div>
+
+        <div class="power-led-group">
+          <div class="power-led" id="powerLed"></div>
+          <span class="power-label">BATTERY</span>
+        </div>
+
+        <!-- Bezel Glass Area -->
+        <div class="screen-port">
+          <!-- Glass filters -->
+          <div class="screen-scanlines"></div>
+          <div class="screen-glow-effect"></div>
+          <div class="screen-reflection"></div>
+
+          <!-- Splash start overlay -->
+          <div class="canvas-overlay" id="bootOverlay">
+            <h2 class="overlay-title">THE HUMAN SYSTEM</h2>
+            <p class="overlay-text">PATCH 17 / REMEMBER MARA</p>
+            <div class="start-tap-msg" id="tapToStartBtn">TAP TO RUN SYSTEM</div>
+          </div>
+
+          <!-- Pixel Display -->
+          <canvas id="gameCanvas" width="160" height="144"></canvas>
+        </div>
+
+        <!-- Second Screen / Diagnostic Readout -->
+        <section class="scanner-panel" id="scannerPanel" aria-live="polite" aria-label="Residual Scanner Feed">
+          <div class="scanner-header">
+            <span>RESIDUAL SCANNER FEED</span>
+            <span id="scannerMode">BOOT</span>
+          </div>
+          <div class="scanner-speaker" id="scannerSpeaker">SYSTEM</div>
+          <div class="scanner-body" id="scannerBody">Tap to run system.</div>
+          <div class="scanner-hint" id="scannerHint">A: continue / X: evidence / Y: reserved</div>
+        </section>
+
+        <div class="brand-plate">P0-A / DUAL SCREEN</div>
+      </div>
+
+      <!-- Controls Deck -->
+      <div class="controls-panel">
+        <div class="main-controls">
+          <!-- Dpad Cross -->
+          <div class="dpad-wrapper">
+            <div class="dpad-bar vert"></div>
+            <div class="dpad-bar horiz"></div>
+            <div class="dpad-center"></div>
+            <button class="dpad-btn dpad-up" data-key="UP" aria-label="Up">▲</button>
+            <button class="dpad-btn dpad-left" data-key="LEFT" aria-label="Left">◀</button>
+            <button class="dpad-btn dpad-right" data-key="RIGHT" aria-label="Right">▶</button>
+            <button class="dpad-btn dpad-down" data-key="DOWN" aria-label="Down">▼</button>
+          </div>
+
+          <!-- In-deck controls guide -->
+          <footer class="keyboard-card" aria-label="Control guide">
+            <strong>Controls</strong>
+            <span class="kbd-line"><span class="kbd-btn">D-PAD</span>/<span class="kbd-btn">WASD</span> move</span>
+            <span class="kbd-line"><span class="kbd-btn">A</span> interact / continue</span>
+            <span class="kbd-line"><span class="kbd-btn">B</span>/<span class="kbd-btn">X</span> back / evidence</span>
+            <span class="kbd-line"><span class="kbd-btn">Y</span> reserved scan</span>
+            <span class="kbd-line"><span class="kbd-btn">SEL</span> palette · <span class="kbd-btn">START</span> restart</span>
+          </footer>
+
+          <!-- SNES X/Y/A/B Button Diamond -->
+          <div class="ab-buttons-wrapper" aria-label="SNES action buttons">
+            <div class="action-group group-x">
+              <button class="action-btn btn-x" data-key="X" aria-label="X Button Evidence Log">X</button>
+              <span class="action-label">X</span>
+            </div>
+            <div class="action-group group-y">
+              <button class="action-btn btn-y" data-key="Y" aria-label="Y Button Reserved">Y</button>
+              <span class="action-label">Y</span>
+            </div>
+            <div class="action-group group-a">
+              <button class="action-btn btn-a" data-key="A" aria-label="A Button Interact">A</button>
+              <span class="action-label">A</span>
+            </div>
+            <div class="action-group group-b">
+              <button class="action-btn btn-b" data-key="B" aria-label="B Button Back Evidence">B</button>
+              <span class="action-label">B</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selector/Action Option Bar -->
+        <div class="system-row">
+          <div class="sys-group">
+            <button class="sys-btn" id="btnSelect" data-key="SELECT" aria-label="Select Button"></button>
+            <span class="sys-label">SELECT</span>
+          </div>
+          <div class="sys-group">
+            <button class="sys-btn" id="btnStart" data-key="START" aria-label="Start Button"></button>
+            <span class="sys-label">START</span>
+          </div>
+        </div>
+
+        <!-- Speaker outputs -->
+        <div class="speaker-grille">
+          <div class="grille-bar"></div>
+          <div class="grille-bar"></div>
+          <div class="grille-bar"></div>
+          <div class="grille-bar"></div>
+          <div class="grille-bar"></div>
+          <div class="grille-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Theme Selection -->
+    <div class="customizer">
+      <button class="skin-opt active" onclick="swapShell('atomic')">Atomic Purple</button>
+      <button class="skin-opt" onclick="swapShell('dmg')">Classic Grey</button>
+      <button class="skin-opt" onclick="swapShell('yellow')">Play It Loud</button>
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       EMULATION GAME LOGIC & AUDIO SYNTH ENGINE
+       ============================================================ -->
+  <script>
+    'use strict';
+
+    /* ==========================================
+       SOUND CHIP SYNTHESIS (WEB AUDIO API)
+       ========================================== */
+    class AudioEngine {
+      constructor() {
+        this.ctx = null;
+      }
+
+      init() {
+        if (this.ctx) return;
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        this.ctx = new AudioContextClass();
+      }
+
+      playStep() {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(120, this.ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(60, this.ctx.currentTime + 0.04);
+
+        gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.005, this.ctx.currentTime + 0.04);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.04);
+      }
+
+      playInteract() {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(400, this.ctx.currentTime);
+        osc.frequency.setValueAtTime(600, this.ctx.currentTime + 0.05);
+
+        gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.1);
+      }
+
+      playEvidence() {
+        if (!this.ctx) return;
+        const osc1 = this.ctx.createOscillator();
+        const osc2 = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc1.type = 'square';
+        osc2.type = 'square';
+        
+        osc1.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+        osc1.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.08); // E5
+        osc1.frequency.setValueAtTime(783.99, this.ctx.currentTime + 0.16); // G5
+        osc1.frequency.setValueAtTime(1046.50, this.ctx.currentTime + 0.24); // C6
+
+        osc2.frequency.setValueAtTime(130, this.ctx.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(60, this.ctx.currentTime + 0.35);
+
+        gain.gain.setValueAtTime(0.12, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.45);
+
+        osc1.start();
+        osc2.start();
+        osc1.stop(this.ctx.currentTime + 0.45);
+        osc2.stop(this.ctx.currentTime + 0.45);
+      }
+
+      playSelect() {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.005, this.ctx.currentTime + 0.05);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.05);
+      }
+
+      playBloop() {
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(200, this.ctx.currentTime);
+        osc.frequency.setValueAtTime(150, this.ctx.currentTime + 0.06);
+
+        gain.gain.setValueAtTime(0.06, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.06);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.06);
+      }
+    }
+
+    const sound = new AudioEngine();
+
+    /* ==========================================
+       SCENES & STATE MANAGEMENT (P0-A FENCE MATCH)
+       ========================================== */
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scannerPanel = document.getElementById('scannerPanel');
+    const scannerMode = document.getElementById('scannerMode');
+    const scannerSpeaker = document.getElementById('scannerSpeaker');
+    const scannerBody = document.getElementById('scannerBody');
+    const scannerHint = document.getElementById('scannerHint');
+    const W = 160;
+    const H = 144;
+    const TILE = 16;
+    const HUD_H = 16;
+    const VIEW_ROWS = 7;
+    const TEXT_Y = 112;
+    const TEXT_H = 32;
+
+    const PALETTES = {
+      // Patch 19: richer 16-bit-inspired canvas palettes. Keys preserved for changePalette().
+      dmg: { light: '#f2e6c6', mid: '#b98f5a', dark: '#5f4a37', ink: '#241b18' },
+      pocket: { light: '#d7d8c4', mid: '#8fa184', dark: '#4d6255', ink: '#17201b' },
+      cyber: { light: '#f8d879', mid: '#c16b2f', dark: '#6d2f38', ink: '#21131d' }
+    };
+    let activePaletteMode = 'dmg';
+
+    const input = { UP: false, DOWN: false, LEFT: false, RIGHT: false, A: false, B: false, X: false, Y: false, START: false, SELECT: false };
+    const just = { UP: false, DOWN: false, LEFT: false, RIGHT: false, A: false, B: false, X: false, Y: false, START: false, SELECT: false };
+
+    const evidenceInfo = {
+      mug: 'Warm mug — residual heat.',
+      song: 'Song — residual signal.',
+      record: 'Record — residual gap.'
+    };
+
+    const ambientText = {
+      bed: [
+        'The sheets are too neat.',
+        'Someone woke here. The system says otherwise.'
+      ],
+      mug: [
+        'This mug might still be warm due to the steam and residue.',
+        'A faint heat still clings to the ceramic.',
+        'The table remembers where the mug sat.'
+      ],
+      record: [
+        'This terminal is still live.',
+        'The screen waits for a query.',
+        'The cursor blinks like it has something to hide.'
+      ],
+      terminal: [
+        'This terminal is still live.',
+        'The screen waits for a query.'
+      ],
+      halsey: [
+        'Halsey says, "Excuse me, sir."',
+        'Halsey mumbles to himself.',
+        'Halsey steps aside without meeting your eyes.'
+      ],
+      tomas: [
+        'Tomas hums under his breath.',
+        'Tomas forgets the words but not the tune.',
+        'Tomas glances over, then keeps humming.'
+      ],
+      okafor: [
+        'Okafor watches the terminal instead of you.',
+        'Okafor says, "Records are stable today."',
+        'Okafor adjusts a file that has no name.'
+      ],
+      wall: [
+        'The wall gives no answer.',
+        'The scanner returns only surface noise.'
+      ]
+    };
+    const ambientCursor = {};
+
+    let scenes;
+    let state;
+    let moveCooldown = 0;
+    let actionLatch = false;
+
+    function buildScenes() {
+      scenes = {
+        room: {
+          name: 'WAKE ROOM',
+          map: [
+            '##########',
+            '#........#',
+            '#..b.....#',
+            '#........#',
+            '#........#',
+            '#........#',
+            '####dd####'
+          ],
+          spawn: { x: 5, y: 5 },
+          portals: [
+            { x: 4, y: 6, to: 'street', spawn: { x: 4, y: 5 } },
+            { x: 5, y: 6, to: 'street', spawn: { x: 5, y: 5 } }
+          ],
+          objects: [
+            { id: 'bed', x: 3, y: 2, kind: 'bed', block: true, talk: () => [
+              ['SELF', 'You woke before the town bell.'],
+              ['SYSTEM', 'Continuity has been corrected. You are safe.'],
+              ['SELF', 'Forty-eight. There were forty-eight.']
+            ]}
+          ]
+        },
+        street: {
+          name: 'CENTER WALK',
+          map: [
+            '##########',
+            '#..c..h..#',
+            '#........#',
+            '#........#',
+            '#........#',
+            '#........#',
+            '####dd####'
+          ],
+          spawn: { x: 5, y: 5 },
+          portals: [
+            { x: 4, y: 6, to: 'room', spawn: { x: 5, y: 5 } },
+            { x: 5, y: 6, to: 'room', spawn: { x: 5, y: 5 } },
+            { x: 3, y: 1, to: 'clinic', spawn: { x: 4, y: 5 } },
+            { x: 6, y: 1, to: 'home', spawn: { x: 5, y: 5 } }
+          ],
+          objects: [
+            { id: 'halsey', x: 2, y: 3, kind: 'npcH', block: true, talk: () => [
+              ['HALSEY', 'Morning. You look pale.'],
+              ['SELF', 'Where is Mara?'],
+              ['HALSEY', 'I do not know that name. The sanctuary has always held forty-seven.'],
+              ['HALSEY', 'You should rest. Everyone is very well today.']
+            ]},
+            { id: 'tomas', x: 7, y: 4, kind: 'npcT', block: true, talk: () => collectEvidence('song', [
+              ['TOMAS', 'Hm hm... hm-hm-hm...'],
+              ['SELF', 'Who taught you that song?'],
+              ['TOMAS', 'Nobody. I think I have always known it.'],
+              ['SYSTEM', 'No resident record contains that melody.'],
+              ['EVIDENCE', 'Scanner catches a song with no source.']
+            ], [
+              ['TOMAS', 'It gets stuck in my head. Is that bad?'],
+              ['SELF', 'No. Keep it a little longer.']
+            ])}
+          ]
+        },
+        home: {
+          name: 'REASSIGNED HOME',
+          map: [
+            '##########',
+            '#..n.....#',
+            '#........#',
+            '#....m...#',
+            '#........#',
+            '#........#',
+            '####dd####'
+          ],
+          spawn: { x: 5, y: 5 },
+          portals: [
+            { x: 4, y: 6, to: 'street', spawn: { x: 6, y: 2 } },
+            { x: 5, y: 6, to: 'street', spawn: { x: 6, y: 2 } }
+          ],
+          objects: [
+            { id: 'nameplate', x: 3, y: 1, kind: 'sign', block: false, talk: () => [
+              ['PLAQUE', 'HALSEY AUXILIARY STORAGE.'],
+              ['PLAQUE', 'Assignment date: always.'],
+              ['SELF', 'The room is too clean around the lie.']
+            ]},
+            { id: 'mug', x: 5, y: 3, kind: 'mug', block: true, talk: () => collectEvidence('mug', [
+              ['SELF', 'The mug is still warm.'],
+              ['SELF', 'A ring on the table marks a cup that is gone.'],
+              ['SYSTEM', 'That object is unclaimed. It will be processed.'],
+              ['EVIDENCE', 'Scanner holds the warmth the record dropped.']
+            ], [
+              ['SELF', 'The mug has cooled, but the table still remembers weight.']
+            ])}
+          ]
+        },
+        clinic: {
+          name: 'CLINIC RECORDS',
+          map: [
+            '##########',
+            '#......r.#',
+            '#........#',
+            '#........#',
+            '#........#',
+            '#........#',
+            '####dd####'
+          ],
+          spawn: { x: 5, y: 5 },
+          portals: [
+            { x: 4, y: 6, to: 'street', spawn: { x: 3, y: 2 } },
+            { x: 5, y: 6, to: 'street', spawn: { x: 3, y: 2 } }
+          ],
+          objects: [
+            { id: 'okafor', x: 3, y: 3, kind: 'npcO', block: true, talk: () => [
+              ['OKAFOR', 'The records are stable this morning. That is a kindness.'],
+              ['SELF', 'A blank field is not stable.'],
+              ['OKAFOR', 'The record reflects the current configuration of the sanctuary.']
+            ]},
+            { id: 'record', x: 7, y: 1, kind: 'terminal', block: true, talk: () => collectEvidence('record', [
+              ['TERMINAL', 'Resident query: MARA.'],
+              ['TERMINAL', 'Name: [blank]. Bed: [blank]. Correction timestamp: 02:17.'],
+              ['SYSTEM', 'No resident by that name has been assigned here.'],
+              ['EVIDENCE', 'The record forgot her, but kept the gap.']
+            ], [
+              ['TERMINAL', 'Name: [blank]. Bed: [blank]. Correction timestamp: 02:17.']
+            ])}
+          ]
+        }
+      };
+    }
+
+    function newState() {
+      buildScenes();
+      state = {
+        scene: 'room',
+        player: { x: 5, y: 5, dir: 'down' },
+        evidence: new Set(),
+        mode: 'dialog',
+        dialog: [
+          ['SYSTEM', 'Patch 17 complete. Morning conditions are within tolerance.'],
+          ['SYSTEM', 'The sanctuary has always supported forty-seven residents.'],
+          ['SYSTEM', 'Residual scanner reads outside tolerance. Recalibration advised.'],
+          ['SELF', 'No. Mara was here yesterday.']
+        ],
+        dialogIndex: 0,
+        feed: {
+          speaker: 'RESIDUAL SCANNER',
+          text: 'A: inspect/talk. X: evidence. B: back. Find 3 contradictions.'
+        },
+        pendingEnd: false,
+        diagnostics: 'OK'
+      };
+    }
+
+    function currentScene() {
+      return scenes[state.scene];
+    }
+
+    function setFeed(speaker, text) {
+      if (!state) return;
+      state.feed = { speaker, text };
+      updateScannerPanel();
+    }
+
+    function nextAmbientLine(key, lines) {
+      const cursor = ambientCursor[key] || 0;
+      ambientCursor[key] = (cursor + 1) % lines.length;
+      return lines[cursor];
+    }
+
+    function ambientLineForObject(o) {
+      const key = o.id || o.kind || 'wall';
+      const lines = ambientText[key] || ambientText[o.kind] || ambientText.wall;
+      return nextAmbientLine(key, lines);
+    }
+
+    function ambientLineForTile(x, y) {
+      const row = currentScene().map[y];
+      if (!row || x < 0 || x >= row.length) {
+        return nextAmbientLine('edge', ['The sanctuary boundary rejects the step.']);
+      }
+      if (row[x] === '#') {
+        return nextAmbientLine('wall', ambientText.wall);
+      }
+      return nextAmbientLine('surface', ['Nothing answers here.']);
+    }
+
+    function updateScannerPanel() {
+      if (!scannerPanel || !state) return;
+      let mode = 'PLAY';
+      let speaker = 'RESIDUAL SCANNER';
+      let body = 'A: inspect/talk. X: evidence. B: back. Find 3 contradictions.';
+      let hint = 'A: inspect/talk / X: evidence / Y: reserved';
+
+      if (state.mode === 'dialog') {
+        const line = state.dialog[state.dialogIndex] || ['', ''];
+        mode = 'DIALOG';
+        speaker = line[0] || 'SYSTEM';
+        body = line[1] || '';
+        hint = 'A: continue';
+      } else if (state.mode === 'log') {
+        mode = 'EVIDENCE';
+        speaker = 'EVIDENCE BUFFER';
+        const got = Object.keys(evidenceInfo).filter(k => state.evidence.has(k));
+        body = got.length ? got.map(k => '• ' + evidenceInfo[k]).join('\n') : 'No proof retained yet.';
+        hint = 'B or X: close';
+      } else if (state.mode === 'ending') {
+        mode = 'RESULT';
+        speaker = 'PATCH 17 RESULT';
+        body = 'MARA EXISTED. Three contradictions were preserved long enough to matter.';
+        hint = 'A or START: restart';
+      } else if (state.feed) {
+        mode = 'FEED';
+        speaker = state.feed.speaker || speaker;
+        body = state.feed.text || body;
+      }
+
+      scannerMode.textContent = mode;
+      scannerSpeaker.textContent = speaker;
+      scannerBody.textContent = body;
+      scannerHint.textContent = hint;
+    }
+
+    function collectEvidence(id, firstLines, repeatLines) {
+      if (state.evidence.has(id)) {
+        return repeatLines;
+      }
+      state.evidence.add(id);
+      sound.playEvidence();
+      if (state.evidence.size >= 3) {
+        state.pendingEnd = true;
+      }
+      return firstLines;
+    }
+
+    function startDialog(lines) {
+      state.mode = 'dialog';
+      state.dialog = lines;
+      state.dialogIndex = 0;
+    }
+
+    function endDialog() {
+      state.mode = 'play';
+      state.dialog = [];
+      state.dialogIndex = 0;
+      if (state.pendingEnd) {
+        state.pendingEnd = false;
+        state.mode = 'ending';
+      }
+    }
+
+    function portalAt(x, y) {
+      return currentScene().portals.find(p => p.x === x && p.y === y);
+    }
+
+    function objectAt(x, y) {
+      return currentScene().objects.find(o => o.x === x && o.y === y);
+    }
+
+    function blocked(x, y) {
+      const row = currentScene().map[y];
+      if (!row || x < 0 || x >= row.length) return true;
+      if (row[x] === '#') return true;
+      const o = objectAt(x, y);
+      return !!(o && o.block);
+    }
+
+    function tryMove(dx, dy, dir) {
+      if (state.mode !== 'play') return;
+      const nx = state.player.x + dx;
+      const ny = state.player.y + dy;
+      state.player.dir = dir;
+      if (!blocked(nx, ny)) {
+        state.player.x = nx;
+        state.player.y = ny;
+        sound.playStep();
+        const p = portalAt(nx, ny);
+        if (p) {
+          state.scene = p.to;
+          state.player.x = p.spawn.x;
+          state.player.y = p.spawn.y;
+          state.player.dir = 'down';
+          setFeed('RESIDUAL SCANNER', currentScene().name + ' feed reacquired.');
+        }
+      } else {
+        const blocker = objectAt(nx, ny);
+        if (blocker) {
+          setFeed('STAGE', ambientLineForObject(blocker));
+        } else {
+          setFeed('SCANNER', ambientLineForTile(nx, ny));
+        }
+        sound.playBloop();
+      }
+    }
+
+    function interact() {
+      if (state.mode === 'dialog') {
+        state.dialogIndex++;
+        if (state.dialogIndex >= state.dialog.length) {
+          endDialog();
+        } else {
+          sound.playInteract();
+        }
+        return;
+      }
+      if (state.mode === 'log') {
+        state.mode = 'play';
+        sound.playInteract();
+        return;
+      }
+      if (state.mode === 'ending') {
+        newState();
+        return;
+      }
+
+      const dirs = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+      const d = dirs[state.player.dir] || [0, 1];
+      const spots = [
+        [state.player.x + d[0], state.player.y + d[1]],
+        [state.player.x, state.player.y]
+      ];
+      for (const [x, y] of spots) {
+        const o = objectAt(x, y);
+        if (o) {
+          sound.playInteract();
+          startDialog(o.talk());
+          return;
+        }
+      }
+      sound.playBloop();
+      startDialog([['SELF', 'Nothing answers here.']]);
+    }
+
+    function toggleLog() {
+      if (state.mode === 'ending') return;
+      if (state.mode === 'dialog') return;
+      state.mode = state.mode === 'log' ? 'play' : 'log';
+      sound.playInteract();
+    }
+
+    function changePalette() {
+      const keys = Object.keys(PALETTES);
+      let idx = keys.indexOf(activePaletteMode);
+      idx = (idx + 1) % keys.length;
+      activePaletteMode = keys[idx];
+      document.body.className = document.body.className.replace(/skin-\w+/g, 'skin-' + activePaletteMode);
+      sound.playSelect();
+    }
+
+    function swapShell(theme) {
+      document.body.className = document.body.className.replace(/shell-\w+/g, 'shell-' + theme);
+      if (sound.ctx) sound.playInteract();
+    }
+
+    function bootSystem() {
+      sound.init();
+      sound.playInteract();
+      document.getElementById('bootOverlay').style.display = 'none';
+      document.getElementById('powerLed').classList.add('on');
+      render();
+    }
+
+    /* ==========================================
+       CANVAS RENDERING ENGINE
+       ========================================== */
+    function drawPixelText(txt, x, y, color) {
+      ctx.fillStyle = color;
+      ctx.font = '8px monospace';
+      ctx.textBaseline = 'top';
+      ctx.fillText(txt, x, y);
+    }
+
+    function wrapText(text, max) {
+      const words = text.split(' ');
+      const lines = [];
+      let line = '';
+      for (const w of words) {
+        const test = line ? line + ' ' + w : w;
+        if (test.length > max) {
+          if (line) lines.push(line);
+          line = w;
+        } else {
+          line = test;
+        }
+      }
+      if (line) lines.push(line);
+      return lines.slice(0, 3);
+    }
+
+    function rect(x, y, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, w, h);
+    }
+
+    function stroke(x, y, w, h, color) {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x + 0.5, y + 0.5, w - 1, h - 1);
+    }
+
+    function drawTile(ch, x, y, pal) {
+      const px = x * TILE;
+      const py = HUD_H + y * TILE;
+
+      if (ch === '#') {
+        // Layered wall block: visual-only stone/control-panel treatment.
+        rect(px, py, TILE, TILE, pal.ink);
+        rect(px + 1, py + 1, 14, 14, pal.dark);
+        rect(px + 2, py + 2, 12, 2, pal.mid);
+        rect(px + 2, py + 5, 12, 1, pal.ink);
+        rect(px + 2, py + 9, 12, 1, pal.ink);
+        rect(px + 3, py + 12, 10, 2, pal.mid);
+        rect(px + 3, py + 3, 1, 1, pal.light);
+        rect(px + 12, py + 11, 1, 1, pal.light);
+      } else if (ch === 'd') {
+        // Doorway / threshold. Same tile meaning, improved depth.
+        rect(px, py, TILE, TILE, pal.dark);
+        rect(px + 1, py + 1, TILE - 2, TILE - 1, pal.mid);
+        rect(px + 3, py + 2, TILE - 6, TILE - 2, pal.light);
+        rect(px + 2, py + 1, 2, TILE - 1, pal.ink);
+        rect(px + TILE - 4, py + 1, 2, TILE - 1, pal.ink);
+        rect(px + 2, py + 1, TILE - 4, 2, pal.ink);
+        rect(px + 4, py + 13, 8, 2, pal.dark);
+
+        // Downward marker.
+        rect(px + 7, py + 4, 2, 6, pal.ink);
+        rect(px + 5, py + 8, 6, 2, pal.ink);
+        rect(px + 6, py + 10, 4, 1, pal.dark);
+      } else if (ch === 'c' || ch === 'h') {
+        // Clinic / Home portal arch. Visual-only; portal coordinates unchanged.
+        rect(px, py, TILE, TILE, pal.dark);
+        rect(px + 2, py + 2, 12, 13, pal.mid);
+        rect(px + 4, py + 4, 8, 11, pal.ink);
+        rect(px + 5, py + 5, 6, 9, pal.light);
+        rect(px + 6, py + 6, 4, 8, pal.dark);
+        if (ch === 'c') {
+          rect(px + 7, py + 3, 2, 1, pal.light);
+          rect(px + 6, py + 2, 4, 1, pal.light);
+        } else {
+          rect(px + 5, py + 2, 6, 2, pal.light);
+        }
+      } else {
+        // Floor tile: subtle paneling for 16-bit RPG feel.
+        rect(px, py, TILE, TILE, pal.light);
+        rect(px, py + 15, TILE, 1, pal.mid);
+        rect(px + 15, py, 1, TILE, pal.mid);
+        rect(px + 2, py + 2, 2, 1, pal.mid);
+        rect(px + 10, py + 8, 3, 1, pal.mid);
+        rect(px + 4, py + 12, 1, 1, pal.dark);
+        rect(px + 12, py + 3, 1, 1, pal.dark);
+      }
+    }
+
+    function drawPerson(x, y, type, pal, dir = 'down') {
+      const px = x * TILE;
+      const py = HUD_H + y * TILE;
+      const fill = type === 'player' ? pal.ink : pal.dark;
+      const trim = type === 'player' ? pal.mid : pal.ink;
+
+      // Shared tiny RPG body silhouette.
+      rect(px + 5, py + 14, 2, 2, fill);
+      rect(px + 9, py + 14, 2, 2, fill);
+      rect(px + 4, py + 8, 8, 6, fill);
+      rect(px + 3, py + 9, 2, 4, fill);
+      rect(px + 11, py + 9, 2, 4, fill);
+      rect(px + 5, py + 3, 6, 5, fill);
+      rect(px + 4, py + 7, 8, 1, trim);
+
+      if (type === 'player') {
+        // Directional cybernetic visor / face marks. Visual only.
+        if (dir === 'down') {
+          rect(px + 6, py + 5, 1, 1, pal.light);
+          rect(px + 9, py + 5, 1, 1, pal.light);
+          rect(px + 6, py + 7, 4, 1, pal.mid);
+          rect(px + 4, py + 10, 8, 1, pal.dark);
+        } else if (dir === 'up') {
+          rect(px + 5, py + 3, 6, 2, pal.dark);
+          rect(px + 6, py + 2, 4, 1, pal.light);
+          rect(px + 4, py + 8, 8, 1, pal.mid);
+        } else if (dir === 'left') {
+          rect(px + 5, py + 5, 2, 1, pal.light);
+          rect(px + 4, py + 6, 2, 1, pal.mid);
+          rect(px + 3, py + 10, 1, 3, pal.mid);
+        } else if (dir === 'right') {
+          rect(px + 9, py + 5, 2, 1, pal.light);
+          rect(px + 10, py + 6, 2, 1, pal.mid);
+          rect(px + 12, py + 10, 1, 3, pal.mid);
+        }
+        return;
+      }
+
+      // Existing NPC identities made more readable; no movement or behavior changes.
+      if (type === 'npcT') {
+        rect(px + 6, py + 1, 4, 3, pal.ink);      // cap/hair
+        rect(px + 5, py + 11, 6, 1, pal.mid);     // humming posture
+        rect(px + 7, py + 5, 2, 1, pal.light);
+      }
+      if (type === 'npcO') {
+        rect(px + 3, py + 6, 10, 2, pal.ink);     // glasses/visor
+        rect(px + 6, py + 3, 4, 1, pal.light);
+        rect(px + 5, py + 10, 6, 2, pal.mid);     // records coat
+      }
+      if (type === 'npcH') {
+        rect(px + 4, py + 1, 8, 2, pal.ink);      // hairline
+        rect(px + 6, py + 5, 4, 1, pal.mid);
+        rect(px + 5, py + 9, 6, 1, pal.light);    // nameplate strip
+      }
+    }
+
+    function drawObject(o, pal) {
+      const px = o.x * TILE;
+      const py = HUD_H + o.y * TILE;
+      switch (o.kind) {
+        case 'bed':
+          // Existing bed, richer bedding/pillow detail.
+          rect(px + 1, py + 6, 14, 8, pal.dark);
+          rect(px + 2, py + 5, 12, 7, pal.mid);
+          rect(px + 2, py + 3, 6, 4, pal.light);
+          rect(px + 8, py + 6, 6, 2, pal.dark);
+          rect(px + 3, py + 11, 10, 1, pal.light);
+          stroke(px + 1, py + 5, 14, 9, pal.ink);
+          break;
+        case 'mug':
+          // Existing mug, now reads as cup + table + steam/residue.
+          rect(px + 2, py + 11, 12, 3, pal.dark);
+          rect(px + 5, py + 5, 6, 7, pal.mid);
+          stroke(px + 5, py + 5, 6, 7, pal.ink);
+          rect(px + 11, py + 7, 3, 3, pal.mid);
+          rect(px + 6, py + 4, 1, 1, pal.light);
+          rect(px + 9, py + 3, 1, 2, pal.light);
+          rect(px + 7, py + 2, 1, 1, pal.mid);
+          break;
+        case 'terminal':
+          // Existing terminal, stronger live-screen silhouette.
+          rect(px + 2, py + 3, 12, 9, pal.ink);
+          rect(px + 3, py + 4, 10, 7, pal.dark);
+          rect(px + 4, py + 5, 8, 5, pal.light);
+          rect(px + 5, py + 6, 5, 1, pal.mid);
+          rect(px + 5, py + 8, 6, 1, pal.mid);
+          rect(px + 4, py + 13, 8, 2, pal.dark);
+          rect(px + 6, py + 12, 4, 1, pal.ink);
+          break;
+        case 'sign':
+          // Existing nameplate/plaque rendering. No new sign/object added.
+          rect(px + 3, py + 4, 10, 7, pal.dark);
+          rect(px + 4, py + 5, 8, 5, pal.mid);
+          rect(px + 5, py + 6, 6, 1, pal.light);
+          rect(px + 5, py + 8, 5, 1, pal.ink);
+          stroke(px + 3, py + 4, 10, 7, pal.ink);
+          rect(px + 7, py + 11, 2, 5, pal.dark);
+          break;
+        case 'npcH': case 'npcT': case 'npcO':
+          drawPerson(o.x, o.y, o.kind, pal);
+          break;
+      }
+    }
+
+    function drawHud(pal) {
+      // More SNES-style HUD plate. Text and proof readout preserved.
+      rect(0, 0, 160, HUD_H, pal.ink);
+      rect(1, 1, 158, 14, pal.dark);
+      rect(2, 2, 156, 1, pal.mid);
+      rect(2, 14, 156, 1, pal.ink);
+      drawPixelText(currentScene().name, 4, 4, pal.light);
+      drawPixelText('PROOF ' + state.evidence.size + '/3', 105, 4, pal.light);
+    }
+
+    function drawWorld(pal) {
+      rect(0, 0, 160, 144, pal.light);
+      drawHud(pal);
+      currentScene().map.forEach((row, y) => {
+        for (let x = 0; x < row.length; x++) {
+          drawTile(row[x], x, y, pal);
+        }
+      });
+      currentScene().objects.forEach(o => drawObject(o, pal));
+      drawPerson(state.player.x, state.player.y, 'player', pal, state.player.dir);
+    }
+
+    function drawEnding(pal) {
+      // Visual-only ending polish. Outcome text preserved.
+      rect(0, 0, 160, 144, pal.ink);
+      rect(5, 5, 150, 134, pal.dark);
+      stroke(6, 6, 148, 132, pal.mid);
+      rect(10, 10, 140, 1, pal.light);
+      rect(10, 132, 140, 1, pal.ink);
+      drawPixelText('PATCH 17 RESULT', 23, 16, pal.light);
+      drawPixelText('MARA EXISTED.', 30, 34, pal.light);
+      drawPixelText('Three contradictions', 13, 54, pal.mid);
+      drawPixelText('were preserved long', 13, 63, pal.mid);
+      drawPixelText('enough to matter.', 13, 72, pal.mid);
+      drawPixelText('PLAYER STATUS:', 27, 94, pal.light);
+      drawPixelText('CONTINUITY THREAT', 17, 105, pal.light);
+      drawPixelText('A / START: restart', 18, 126, pal.mid);
+    }
+
+    function drawDiagnostics(pal) {
+      if (state.diagnostics !== 'OK') {
+        rect(0, 0, 160, 16, pal.ink);
+        drawPixelText('ERR ' + state.diagnostics.slice(0, 18), 2, 4, pal.light);
+      }
+    }
+
+    function render() {
+      const pal = PALETTES[activePaletteMode];
+      try {
+        if (state.mode === 'ending') {
+          drawEnding(pal);
+        } else {
+          drawWorld(pal);
+        }
+        drawDiagnostics(pal);
+        updateScannerPanel();
+      } catch (err) {
+        state.diagnostics = err.message || String(err);
+        rect(0, 0, 160, 144, pal.ink);
+        drawPixelText('SCRIPT ERROR', 20, 48, pal.light);
+        drawPixelText(state.diagnostics.slice(0, 24), 6, 64, pal.light);
+        if (scannerMode) scannerMode.textContent = 'ERROR';
+        if (scannerSpeaker) scannerSpeaker.textContent = 'SCRIPT ERROR';
+        if (scannerBody) scannerBody.textContent = state.diagnostics.slice(0, 120);
+        if (scannerHint) scannerHint.textContent = 'Reload or revert to previous patch.';
+      }
+    }
+
+    /* ==========================================
+       LOOP CONTROLLER
+       ========================================== */
+    function update() {
+      if (moveCooldown > 0) moveCooldown--;
+      if (state.mode === 'play' && moveCooldown === 0) {
+        if (input.UP) { tryMove(0, -1, 'up'); moveCooldown = 9; }
+        else if (input.DOWN) { tryMove(0, 1, 'down'); moveCooldown = 9; }
+        else if (input.LEFT) { tryMove(-1, 0, 'left'); moveCooldown = 9; }
+        else if (input.RIGHT) { tryMove(1, 0, 'right'); moveCooldown = 9; }
+      }
+      render();
+      requestAnimationFrame(update);
+    }
+
+    /* ==========================================
+       INPUT HANDLER BINDINGS
+       ========================================== */
+    const KEY_BINDINGS = {
+      ArrowUp: 'UP', KeyW: 'UP',
+      ArrowDown: 'DOWN', KeyS: 'DOWN',
+      ArrowLeft: 'LEFT', KeyA: 'LEFT',
+      ArrowRight: 'RIGHT', KeyD: 'RIGHT',
+      KeyZ: 'A', Space: 'A', Enter: 'A',
+      KeyX: 'B', Backspace: 'B', KeyE: 'B',
+      KeyC: 'X', KeyY: 'Y',
+      ShiftLeft: 'SELECT', ShiftRight: 'SELECT',
+      Escape: 'START', KeyR: 'START'
+    };
+
+    window.addEventListener('keydown', e => {
+      const binding = KEY_BINDINGS[e.code];
+      if (binding) {
+        e.preventDefault();
+        sound.init();
+        if (!input[binding]) {
+          triggerButtonFeedback(binding, true);
+        }
+        input[binding] = true;
+        handleInstantInputs(binding);
+      }
+    }, { passive: false });
+
+    window.addEventListener('keyup', e => {
+      const binding = KEY_BINDINGS[e.code];
+      if (binding) {
+        e.preventDefault();
+        input[binding] = false;
+        triggerButtonFeedback(binding, false);
+      }
+    }, { passive: false });
+
+    function handleInstantInputs(btn) {
+      if (btn === 'A') {
+        interact();
+      }
+      if (btn === 'B') {
+        toggleLog();
+      }
+      if (btn === 'X') {
+        toggleLog();
+      }
+      // Y is intentionally inert in this pass; reserved for a future Residual Scan.
+      if (btn === 'SELECT') {
+        changePalette();
+      }
+      if (btn === 'START') {
+        newState();
+      }
+    }
+
+    function triggerButtonFeedback(key, isPressed) {
+      let selector = '';
+      if (key === 'UP') selector = '.dpad-up';
+      if (key === 'DOWN') selector = '.dpad-down';
+      if (key === 'LEFT') selector = '.dpad-left';
+      if (key === 'RIGHT') selector = '.dpad-right';
+      if (key === 'A') selector = '.btn-a';
+      if (key === 'B') selector = '.btn-b';
+      if (key === 'X') selector = '.btn-x';
+      if (key === 'Y') selector = '.btn-y';
+      if (key === 'SELECT') selector = '#btnSelect';
+      if (key === 'START') selector = '#btnStart';
+
+      if (selector) {
+        const btn = document.querySelector(selector);
+        if (btn) {
+          if (isPressed) btn.classList.add('pressed');
+          else btn.classList.remove('pressed');
+        }
+      }
+    }
+
+    function attachPointerControls() {
+      document.querySelectorAll('[data-key]').forEach(btn => {
+        const key = btn.getAttribute('data-key');
+        let active = false;
+
+        const press = (e) => {
+          e.preventDefault();
+          sound.init();
+          active = true;
+          input[key] = true;
+          btn.classList.add('pressed');
+          handleInstantInputs(key);
+        };
+
+        const release = (e) => {
+          e.preventDefault();
+          active = false;
+          input[key] = false;
+          btn.classList.remove('pressed');
+        };
+
+        btn.addEventListener('pointerdown', press);
+        btn.addEventListener('pointerup', release);
+        btn.addEventListener('pointercancel', release);
+        btn.addEventListener('pointerleave', release);
+      });
+    }
+
+    // Initialize state
+    document.getElementById('tapToStartBtn').addEventListener('click', bootSystem);
+    document.getElementById('tapToStartBtn').addEventListener('touchend', e => {
+      e.preventDefault();
+      bootSystem();
+    });
+
+    newState();
+    updateScannerPanel();
+    attachPointerControls();
+    requestAnimationFrame(update);
+
+  </script>
+</body>
+</html>
