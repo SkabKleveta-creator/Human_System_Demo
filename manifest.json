@@ -1,0 +1,27 @@
+{
+  "project": "The Human System \u2014 P0-A Remember Mara",
+  "current_stable_build": "Patch 19 \u2014 SNES In-Game Visual Identity Pass",
+  "created_utc": "2026-06-09T16:26:06.658753Z",
+  "entry_point": "index.html",
+  "notes": "Static HTML/JS/canvas prototype. Safe for GitHub Pages. No external dependencies.",
+  "files": [
+    ".gitignore",
+    "README.md",
+    "builds/the_human_system_rpg_p18_2_locked.html",
+    "builds/the_human_system_rpg_p19_visual_identity.html",
+    "docs/HTML_TOUCHPOINT_INSPECTION_REPORT.md",
+    "docs/MINIMAL_RESIDUAL_SCANNER_PATCH_SPEC.md",
+    "docs/MINIMAL_SNES_SHELL_CONTROL_PASS_SPEC.md",
+    "docs/NEXT_IMPLEMENTATION_PROMPT.md",
+    "docs/NEXT_SNES_PRESENTATION_IMPLEMENTATION_PROMPTS.md",
+    "docs/P0_IMPLANT_REFRAME_NOTE.md",
+    "docs/PATCH_18_2_LOCK_NOTES.md",
+    "docs/PATCH_19_LOCK_NOTES.md",
+    "docs/PROJECT_DIRECTION_LOCK.md",
+    "docs/README_INDEX.md",
+    "docs/RESIDUAL_SCANNER_MANUAL_TEST_SCRIPT.md",
+    "docs/SNES_IN_GAME_VISUAL_IDENTITY_PASS_SPEC.md",
+    "docs/SNES_PRESENTATION_DIRECTION_LOCK.md",
+    "index.html"
+  ]
+}
